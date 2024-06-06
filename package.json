@@ -1,8 +1,10 @@
 {
   "dependencies": {
+    "pg": "8.12.0",
     "ts-postgres": "2.0.2"
   },
   "devDependencies": {
+    "@types/pg": "8.11.6",
     "vitest": "1.6.0"
   }
 }

@@ -1,13 +1,10 @@
-import { Client, connect } from 'ts-postgres'
+import { ClientLike, Driver } from './Driver'
 
 export class DatabaseManager {
-    constructor(private readonly client: Client) {}
+    constructor(private readonly client: ClientLike) {}
 
-    static async connectToSystemDatabase() {
-        const client = await connect({
-            database: 'postgres'
-        })
-
+    static async connectToSystemDatabase(driver: Driver) {
+        const client = await driver.connect('postgres')
         return new DatabaseManager(client)
     }
 
@@ -38,9 +35,6 @@ export class DatabaseManager {
             await this.client.query(`create database ${name}`)
         }
         catch (error) {
-            // DatabaseError is not exported as value, so we 
-            // have to do checks on `unknown` instead of 
-            // instanceof
             if (looksLikeDatabaseErrorWithCode(error, '42P04')) {
                 return
             }

@@ -3,6 +3,7 @@ Environment:
 - Node.js 20.11.0
 - PostgreSQL 16.2
 - ts-postgres 2.0.2
+- pg 8.12.0
 
 # Installing
 
@@ -12,9 +13,17 @@ npm ci
 
 # Running
 
+Test using ts-postgres
+
 ```
-npx vitest
+npx vitest src/ts-postgres.test.ts
 ```
 
-Note: temporary PostgreSQL database with random name
-in form test_[incrementing-integer] will be created and deleted
+Test using pg
+
+```
+npx vitest src/pg.test.ts
+```
+
+Warning: tests create and delete temporary PostgreSQL databases with random names
+in form `test_<random-id>` 
